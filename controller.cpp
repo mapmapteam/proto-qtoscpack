@@ -9,6 +9,7 @@ Controller::Controller(const QString& sendHost, quint16 sendPort, quint16 receiv
     QObject(parent)
 {
     Q_UNUSED(receivePort);
+    qDebug() << "create OSC sender to " << sendHost << " " << sendPort;
     m_sender = new OscSender(sendHost, sendPort, this);
     m_sendTimer = new QTimer(this);
 

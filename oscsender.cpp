@@ -3,6 +3,8 @@
 #include "osc/OscTypes.h"
 #include <iostream>
 
+// FIXME: we should also allow addresses such as "localhost", or "example.com"
+
 OscSender::OscSender(const QString& hostAddress, quint16 port, QObject *parent) :
         QObject(parent),
         m_udpSocket(new QUdpSocket(this)),
@@ -16,10 +18,11 @@ void OscSender::send(const QString& oscAddress, const QVariantList& arguments) {
     QByteArray datagram;
     this->variantListToByteArray(datagram, oscAddress, arguments);
 
-    qint64 written = m_udpSocket->writeDatagram(datagram.data(), datagram.size(),
+    qint64 written = m_udpSocket->writeDatagram(datagram, //datagram.data(), datagram.size(),
             m_hostAddress, m_port);
 
-    std::cout << "" << datagram.size() << " " << datagram.toHex().toStdString() << std::endl;;
+    qDebug() << "Send " << datagram.size() << " bytes: " << datagram.toHex();
+    qDebug() << "...to " << m_hostAddress << " " << m_port;
 
     if (written == -1) {
         std::cout << "Failed to send OSC";

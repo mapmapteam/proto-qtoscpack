@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QStringList argumentList = QCoreApplication::arguments();
     QTextStream standardOutput(stdout);
 
-    QString sendOscHost = "localhost";
+    QString sendOscHost = "127.0.0.1";
     quint16 sendOscPort = 14444;
     quint16 receiveOscPort = 15555;
 
