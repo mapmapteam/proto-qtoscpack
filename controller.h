@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QVariant>
 #include "oscsender.h"
+#include "oscreceiver.h"
 
 /**
  * @brief Controller.
@@ -23,8 +24,7 @@ public slots:
 private:
     QTimer* m_sendTimer;
     OscSender* m_sender;
-    //TODO OscReceiver* m_receiver;
-
+    OscReceiver* m_receiver;
     static const int TIMEOUT_INTERVAL_MS;
 };
 

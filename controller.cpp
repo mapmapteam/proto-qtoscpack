@@ -27,6 +27,12 @@ Controller::Controller(const QString& sendHost, quint16 sendPort, quint16 receiv
     m_sendTimer->start(10); // ms
     //connect(&m_timeoutTimer, &QTimer::timeout, this, &Controller::timeoutCb);
     //m_timeoutTimer.start(TIMEOUT_INTERVAL_MS);
+
+    m_receiver = new OscReceiver(receivePort, this);
+    connect(m_receiver, &OscReceiver::messageReceived, this, [this](const QString& oscAddress, const QVariantList& arguments) {
+        qDebug() << "Received " << oscAddress;
+        qDebug() << arguments;
+    });
 }
 
 void Controller::timeoutCb() {

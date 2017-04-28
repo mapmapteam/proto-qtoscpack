@@ -25,10 +25,10 @@ void OscSender::send(const QString& oscAddress, const QVariantList& arguments) {
     qDebug() << "...to " << m_hostAddress << " " << m_port;
 
     if (written == -1) {
-        std::cout << "Failed to send OSC";
+        qCritical() << "Failed to send OSC";
     }
-    m_udpSocket->flush();
-    m_udpSocket->waitForBytesWritten();
+    //m_udpSocket->flush();
+    //m_udpSocket->waitForBytesWritten();
 }
 
 

@@ -12,7 +12,8 @@ SOURCES += main.cpp \
     osc/OscPrintReceivedElements.cpp \
     osc/OscReceivedElements.cpp \
     osc/OscTypes.cpp \
-    controller.cpp
+    controller.cpp \
+    oscreceiver.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,5 +33,6 @@ HEADERS += \
     osc/OscPrintReceivedElements.h \
     osc/OscReceivedElements.h \
     osc/OscTypes.h \
-    controller.h
+    controller.h \
+    oscreceiver.h
 
