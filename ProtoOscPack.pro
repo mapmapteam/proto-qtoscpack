@@ -1,10 +1,10 @@
 TEMPLATE = app
 
 QT += qml quick
+QT += quickcontrols2
 
 CONFIG += c++11
 CONFIG += qtquickcompiler # for better performances -- but it's only with the commercial Qt version (no op in the free version)
-# CONFIG += quickcontrols2
 
 SOURCES += main.cpp \
     oscsender.cpp \

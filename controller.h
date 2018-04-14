@@ -17,6 +17,9 @@ public:
 
 signals:
 
+public:
+    Q_INVOKABLE void sendSomething(const QString& oscAddress, const QVariantList& arguments);
+
 public slots:
     void timeoutCb();
     void messageReceived(const QString& oscAddress, const QVariantList& value);

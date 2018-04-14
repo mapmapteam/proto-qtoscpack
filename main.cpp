@@ -41,6 +41,9 @@ int main(int argc, char *argv[])
     Controller controller(sendOscHost, sendOscPort, receiveOscPort, &app);
 
     QQmlApplicationEngine engine;
+    // Pass a C++ object to QML.
+    // Note: It's considered bad practice to do the opposite. Always access C++ methods, signals and properties from QML,
+    // and not the other way around.
     engine.rootContext()->setContextProperty("controller", &controller);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

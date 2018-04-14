@@ -44,3 +44,7 @@ void Controller::messageReceived(const QString& oscAddress, const QVariantList& 
     Q_UNUSED(value);
     // TODO
 }
+
+void Controller::sendSomething(const QString& oscAddress, const QVariantList& arguments) {
+    this->m_sender->send(oscAddress, arguments);
+}
