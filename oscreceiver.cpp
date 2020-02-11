@@ -6,7 +6,8 @@ OscReceiver::OscReceiver(quint16 receivePort, QObject *parent) :
         QObject(parent)
 {
     m_udpSocket = new QUdpSocket(this);
-    m_udpSocket->bind(QHostAddress::LocalHost, receivePort);
+    // m_udpSocket->bind(QHostAddress::LocalHost, receivePort);
+    m_udpSocket->bind(QHostAddress::Any, receivePort);
 
     connect(m_udpSocket, &QUdpSocket::readyRead, this, [this]() {
         while (this->m_udpSocket->hasPendingDatagrams()) {
