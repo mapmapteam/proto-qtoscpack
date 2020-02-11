@@ -17,6 +17,9 @@ OscReceiver::OscReceiver(quint16 receivePort, QObject *parent) :
             QString oscAddress;
             this->byteArrayToVariantList(arguments, oscAddress, data);
             emit messageReceived(oscAddress, arguments);
+            qDebug() << "Reveived: ";
+            qDebug() << oscAddress;
+            qDebug() << arguments;
         }
     });
 }

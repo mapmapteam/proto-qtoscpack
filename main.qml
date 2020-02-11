@@ -8,6 +8,15 @@ Window {
     height: 240
     visible: true
 
+    Connections {
+        target: controller
+
+        onMessageReceived: {
+            var data = parameters;
+            console.log("(QML) Message received: " + data);
+        }
+    }
+
     Rectangle {
         anchors.fill: parent
         color: "#ffcc33"
@@ -15,7 +24,7 @@ Window {
             text: "Push Me"
             anchors.centerIn: parent
             onClicked: {
-                controller.sendSomething("/hello", 123, 3.14159, "from QML");
+                controller.sendSomething("/hello", [123, 3.14159, "from QML"]);
             }
         }
     }

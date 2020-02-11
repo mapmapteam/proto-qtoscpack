@@ -39,10 +39,12 @@ void Controller::timeoutCb() {
     qDebug() << "timeoutCb";
 }
 
-void Controller::messageReceived(const QString& oscAddress, const QVariantList& value) {
+void Controller::messageReceivedCb(const QString& oscAddress, const QVariantList& value) {
     Q_UNUSED(oscAddress);
     Q_UNUSED(value);
     // TODO
+    emit messageReceived(oscAddress, value);
+    qDebug() << "messageReceivedCb: " << oscAddress << endl;
 }
 
 void Controller::sendSomething(const QString& oscAddress, const QVariantList& arguments) {

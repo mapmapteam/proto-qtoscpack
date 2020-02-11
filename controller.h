@@ -16,13 +16,14 @@ public:
     explicit Controller(const QString& sendHost, quint16 sendPort, quint16 receivePort, QObject* parent = 0);
 
 signals:
+    void messageReceived(const QString& oscAddress, const QVariantList& value);
 
 public:
     Q_INVOKABLE void sendSomething(const QString& oscAddress, const QVariantList& arguments);
 
 public slots:
     void timeoutCb();
-    void messageReceived(const QString& oscAddress, const QVariantList& value);
+    void messageReceivedCb(const QString& oscAddress, const QVariantList& value);
 
 private:
     QTimer* m_sendTimer;

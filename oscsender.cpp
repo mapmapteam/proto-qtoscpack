@@ -11,15 +11,14 @@ OscSender::OscSender(const QString& hostAddress, quint16 port, QObject *parent) 
         m_hostAddress(hostAddress),
         m_port(port)
 {
-
+    m_udpSocket->connectToHost(QHostAddress(m_hostAddress) , m_port);
 }
 
 void OscSender::send(const QString& oscAddress, const QVariantList& arguments) {
     QByteArray datagram;
     this->variantListToByteArray(datagram, oscAddress, arguments);
 
-    qint64 written = m_udpSocket->writeDatagram(datagram, //datagram.data(), datagram.size(),
-            m_hostAddress, m_port);
+    qint64 written = m_udpSocket->write(datagram);
 
     qDebug() << "Send " << datagram.size() << " bytes: " << datagram.toHex();
     qDebug() << "...to " << m_hostAddress << " " << m_port;
@@ -27,8 +26,8 @@ void OscSender::send(const QString& oscAddress, const QVariantList& arguments) {
     if (written == -1) {
         qCritical() << "Failed to send OSC";
     }
-    //m_udpSocket->flush();
-    //m_udpSocket->waitForBytesWritten();
+    m_udpSocket->flush();
+    m_udpSocket->waitForBytesWritten();
 }
 
 
