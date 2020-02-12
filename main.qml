@@ -8,12 +8,15 @@ Window {
     height: 240
     visible: true
 
+    function handleMessageReceived(oscPath, oscArguments) {
+        console.log("QML-Received OSC: " + oscPath + " " + oscArguments);
+    }
+
     Connections {
         target: controller
 
         onMessageReceived: {
-            var data = parameters;
-            console.log("(QML) Message received: " + data);
+            handleMessageReceived(oscPath, oscArguments);
         }
     }
 

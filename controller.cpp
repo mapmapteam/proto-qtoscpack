@@ -30,7 +30,7 @@ Controller::Controller(const QString& sendHost, quint16 sendPort, quint16 receiv
 
     m_receiver = new OscReceiver(receivePort, this);
     connect(m_receiver, &OscReceiver::messageReceived, this, [this](const QString& oscAddress, const QVariantList& arguments) {
-        qDebug() << "Received " << oscAddress;
+        qDebug() << "C++Controller::Received " << oscAddress;
         qDebug() << arguments;
     });
 }

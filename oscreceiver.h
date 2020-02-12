@@ -36,6 +36,7 @@ signals:
     void messageReceived(const QString& oscAddress, const QVariantList& message);
 
 public slots:
+    void readyReadCb();
 
 private:
     QUdpSocket* m_udpSocket;

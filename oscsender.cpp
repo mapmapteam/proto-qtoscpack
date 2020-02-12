@@ -20,8 +20,8 @@ void OscSender::send(const QString& oscAddress, const QVariantList& arguments) {
 
     qint64 written = m_udpSocket->write(datagram);
 
-    qDebug() << "Send" << datagram.size() << "bytes:" << datagram.toHex();
-    qDebug() << "to " << m_hostAddress << "on port" << m_port;
+    qDebug() << "C++OscSender Send" << datagram.size() << "bytes:" << datagram.toHex() <<
+                "to " << m_hostAddress << "on port" << m_port;
 
     if (written == -1) {
         qCritical() << "Failed to send OSC. (write bytes to the send socket)";
@@ -47,6 +47,8 @@ void OscSender::variantListToByteArray(QByteArray& outputResult, const QString& 
             packet << argument.toInt();
         } else if (type == QMetaType::Float) {
             packet << argument.toFloat();
+        } else if (type == QMetaType::Double) {
+            packet << argument.toDouble();
         } else if (type == QMetaType::QString) {
             packet << argument.toString().toStdString().c_str();
         //} else if (type == QMetaType::QByteArray) {
@@ -54,6 +56,8 @@ void OscSender::variantListToByteArray(QByteArray& outputResult, const QString& 
         //    packet << b;
         } else if (type == QMetaType::Bool) {
             packet << argument.toBool();
+        } else {
+            qDebug() << "Unhandled OSC argument type " << argument.typeName();
         }
         // TODO: implement other OSC types
     }

@@ -9,20 +9,20 @@ OscReceiver::OscReceiver(quint16 receivePort, QObject* parent) :
     // m_udpSocket->bind(QHostAddress::LocalHost, receivePort);
     m_udpSocket->bind(QHostAddress::Any, receivePort);
 
-    connect(m_udpSocket, &QUdpSocket::readyRead, this, [this]() {
-        while (this->m_udpSocket->hasPendingDatagrams()) {
-            QNetworkDatagram datagram = this->m_udpSocket->receiveDatagram();
-            // XXX: we could also retrieve the sender host and port
-            QByteArray data = datagram.data();
-            QVariantList arguments;
-            QString oscAddress;
-            this->byteArrayToVariantList(arguments, oscAddress, data);
-            emit messageReceived(oscAddress, arguments);
-            qDebug() << "Received: ";
-            qDebug() << oscAddress;
-            qDebug() << arguments;
-        }
-    });
+    connect(m_udpSocket, &QUdpSocket::readyRead, this, &OscReceiver::readyReadCb);
+}
+
+void OscReceiver::readyReadCb() {
+    while (this->m_udpSocket->hasPendingDatagrams()) {
+        QNetworkDatagram datagram = this->m_udpSocket->receiveDatagram();
+        // XXX: we could also retrieve the sender host and port
+        QByteArray data = datagram.data();
+        QVariantList arguments;
+        QString oscAddress;
+        this->byteArrayToVariantList(arguments, oscAddress, data);
+        emit messageReceived(oscAddress, arguments);
+        qDebug() << "C++OscReceiver Received: " << oscAddress << arguments;
+    }
 }
 
 void OscReceiver::byteArrayToVariantList(QVariantList& outputVariantList, QString& outputOscAddress, const QByteArray& inputByteArray) {
