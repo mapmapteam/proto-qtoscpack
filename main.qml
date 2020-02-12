@@ -13,10 +13,10 @@ Window {
     }
 
     Connections {
-        target: controller
+        target: oscReceiver
 
         onMessageReceived: {
-            handleMessageReceived(oscPath, oscArguments);
+            handleMessageReceived(oscAddress, message);
         }
     }
 
@@ -27,7 +27,7 @@ Window {
             text: "Push Me"
             anchors.centerIn: parent
             onClicked: {
-                controller.sendSomething("/hello", [123, 3.14159, "from QML"]);
+                oscSender.send("/hello", [123, 3.14159, "from QML"]);
             }
         }
     }

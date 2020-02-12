@@ -8,6 +8,8 @@
 #include <QTimer>
 #include <QObject>
 #include "controller.h"
+#include "oscsender.h"
+#include "oscreceiver.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,13 +40,18 @@ int main(int argc, char *argv[])
     standardOutput << QObject::tr("Receive OSC on port %1").arg(receiveOscPort) << endl;
     standardOutput << QObject::tr("Send OSC to %1:%2").arg(sendOscHost).arg(sendOscPort) << endl;
 
-    Controller controller(sendOscHost, sendOscPort, receiveOscPort, &app);
+    //Controller controller(sendOscHost, sendOscPort, receiveOscPort, &app);
+    OscReceiver oscReceiver(receiveOscPort);
+    OscSender oscSender(sendOscHost, sendOscPort);
+
 
     QQmlApplicationEngine engine;
     // Pass a C++ object to QML.
     // Note: It's considered bad practice to do the opposite. Always access C++ methods, signals and properties from QML,
     // and not the other way around.
-    engine.rootContext()->setContextProperty("controller", &controller);
+    //engine.rootContext()->setContextProperty("controller", &controller);
+    engine.rootContext()->setContextProperty("oscSender", &oscSender);
+    engine.rootContext()->setContextProperty("oscReceiver", &oscReceiver);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     int ret = app.exec();

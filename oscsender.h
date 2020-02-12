@@ -30,14 +30,14 @@ public:
      * @param port
      * @param parent
      */
-    explicit OscSender(const QString& hostAddress, quint16 port, QObject *parent);
+    explicit OscSender(const QString& hostAddress, quint16 port, QObject* parent = nullptr);
 
     /**
      * @brief Sends an OSC message to the host and address that this sender is configured to send to.
      * @param oscAddress OSC path /like/this
      * @param arguments List of QVariant arguments of any type
      */
-    void send(const QString& oscAddress, const QVariantList& arguments);
+    Q_INVOKABLE void send(const QString& oscAddress, const QVariantList& arguments);
 
 signals:
     // TODO: Add messageSent signal
