@@ -20,11 +20,11 @@ void OscSender::send(const QString& oscAddress, const QVariantList& arguments) {
 
     qint64 written = m_udpSocket->write(datagram);
 
-    qDebug() << "Send " << datagram.size() << " bytes: " << datagram.toHex();
-    qDebug() << "...to " << m_hostAddress << " " << m_port;
+    qDebug() << "Send" << datagram.size() << "bytes:" << datagram.toHex();
+    qDebug() << "to " << m_hostAddress << "on port" << m_port;
 
     if (written == -1) {
-        qCritical() << "Failed to send OSC";
+        qCritical() << "Failed to send OSC. (write bytes to the send socket)";
     }
     m_udpSocket->flush();
     m_udpSocket->waitForBytesWritten();
@@ -36,7 +36,8 @@ void OscSender::variantListToByteArray(QByteArray& outputResult, const QString& 
     osc::OutboundPacketStream packet(buffer, 1024);
     // FIXME: Sending datagrams larger than 512 bytes is in general disadvised, as even if they are sent successfully,
     // they are likely to be fragmented by the IP layer before arriving at their final destination.
-    packet << osc::BeginBundleImmediate << osc::BeginMessage(oscAddress.toStdString().c_str());
+    // packet << osc::BeginBundleImmediate << osc::BeginMessage(oscAddress.toStdString().c_str());
+    packet << osc::BeginMessage(oscAddress.toStdString().c_str());
 
     for (int i = 0; i < arguments.count(); ++ i) {
         QVariant argument = arguments[i];
@@ -57,6 +58,7 @@ void OscSender::variantListToByteArray(QByteArray& outputResult, const QString& 
         // TODO: implement other OSC types
     }
 
-    packet << osc::EndMessage << osc::EndBundle;
+    // packet << osc::EndMessage << osc::EndBundle;
+    packet << osc::EndMessage;
     outputResult.append(packet.Data(), packet.Size());
 }

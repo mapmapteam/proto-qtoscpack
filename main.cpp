@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
     QString sendOscHost = "127.0.0.1";
     quint16 sendOscPort = 14444;
-    quint16 receiveOscPort = 15555;
+    quint16 receiveOscPort = 14444;
 
     if (argumentCount > 1) {
         sendOscHost = argumentList.at(1);

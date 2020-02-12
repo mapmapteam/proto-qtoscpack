@@ -2,7 +2,7 @@
 #include "osc/OscTypes.h"
 #include "osc/OscReceivedElements.h"
 
-OscReceiver::OscReceiver(quint16 receivePort, QObject *parent) :
+OscReceiver::OscReceiver(quint16 receivePort, QObject* parent) :
         QObject(parent)
 {
     m_udpSocket = new QUdpSocket(this);
@@ -18,7 +18,7 @@ OscReceiver::OscReceiver(quint16 receivePort, QObject *parent) :
             QString oscAddress;
             this->byteArrayToVariantList(arguments, oscAddress, data);
             emit messageReceived(oscAddress, arguments);
-            qDebug() << "Reveived: ";
+            qDebug() << "Received: ";
             qDebug() << oscAddress;
             qDebug() << arguments;
         }

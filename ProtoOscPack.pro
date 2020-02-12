@@ -6,6 +6,8 @@ QT += quickcontrols2
 CONFIG += c++11
 CONFIG += qtquickcompiler # for better performances -- but it's only with the commercial Qt version (no op in the free version)
 
+CONFIG += sdk_no_version_check # disable warning on macOS
+
 SOURCES += main.cpp \
     oscsender.cpp \
     osc/OscOutboundPacketStream.cpp \
