@@ -1,6 +1,6 @@
 #include "oscsender.h"
-#include "osc/OscOutboundPacketStream.h"
-#include "osc/OscTypes.h"
+#include "contrib/oscpack/OscOutboundPacketStream.h"
+#include "contrib/oscpack/OscTypes.h"
 #include <iostream>
 
 // FIXME: we should also allow addresses such as "localhost", or "example.com"

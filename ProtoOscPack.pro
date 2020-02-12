@@ -4,17 +4,18 @@ QT += qml quick
 QT += quickcontrols2
 
 CONFIG += c++11
-CONFIG += qtquickcompiler # for better performances -- but it's only with the commercial Qt version (no op in the free version)
+CONFIG += qtquickcompiler
+# for better performances -- but it's only with the commercial Qt version (no op in the free version)
 
 CONFIG += sdk_no_version_check # disable warning on macOS
 
 SOURCES += main.cpp \
     oscsender.cpp \
-    osc/OscOutboundPacketStream.cpp \
-    osc/OscPrintReceivedElements.cpp \
-    osc/OscReceivedElements.cpp \
-    osc/OscTypes.cpp \
-    oscreceiver.cpp
+    oscreceiver.cpp \
+    contrib/oscpack/OscOutboundPacketStream.cpp \
+    contrib/oscpack/OscPrintReceivedElements.cpp \
+    contrib/oscpack/OscReceivedElements.cpp \
+    contrib/oscpack/OscTypes.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,13 +27,13 @@ include(deployment.pri)
 
 HEADERS += \
     oscsender.h \
-    osc/MessageMappingOscPacketListener.h \
-    osc/OscException.h \
-    osc/OscHostEndianness.h \
-    osc/OscOutboundPacketStream.h \
-    osc/OscPacketListener.h \
-    osc/OscPrintReceivedElements.h \
-    osc/OscReceivedElements.h \
-    osc/OscTypes.h \
-    oscreceiver.h
+    oscreceiver.h \
+    contrib/oscpack/MessageMappingOscPacketListener.h \
+    contrib/oscpack/OscException.h \
+    contrib/oscpack/OscHostEndianness.h \
+    contrib/oscpack/OscOutboundPacketStream.h \
+    contrib/oscpack/OscPacketListener.h \
+    contrib/oscpack/OscPrintReceivedElements.h \
+    contrib/oscpack/OscReceivedElements.h \
+    contrib/oscpack/OscTypes.h
 

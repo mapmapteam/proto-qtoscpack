@@ -1,6 +1,6 @@
 #include "oscreceiver.h"
-#include "osc/OscTypes.h"
-#include "osc/OscReceivedElements.h"
+#include "contrib/oscpack/OscTypes.h"
+#include "contrib/oscpack/OscReceivedElements.h"
 
 OscReceiver::OscReceiver(quint16 receivePort, QObject* parent) :
         QObject(parent)
